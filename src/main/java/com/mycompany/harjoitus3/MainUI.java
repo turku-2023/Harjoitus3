@@ -34,6 +34,8 @@ public class MainUI extends javax.swing.JFrame {
         textName = new javax.swing.JTextField();
         btnShowCatData = new javax.swing.JButton();
         labelResult = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textResult = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +51,10 @@ public class MainUI extends javax.swing.JFrame {
                 btnShowCatDataActionPerformed(evt);
             }
         });
+
+        textResult.setColumns(20);
+        textResult.setRows(5);
+        jScrollPane1.setViewportView(textResult);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,8 +76,10 @@ public class MainUI extends javax.swing.JFrame {
                             .addComponent(textName)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,16 +98,36 @@ public class MainUI extends javax.swing.JFrame {
                     .addComponent(textName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnShowCatData)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(labelResult)
-                .addGap(74, 74, 74))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(labelResult)
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShowCatDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowCatDataActionPerformed
-        labelResult.setText("Testi");
+        labelResult.setText("");
+        Cat objectCat=new Cat();
+        objectCat.setColor(textColor.getText());
+        try {
+           objectCat.setWeight(Double.parseDouble(textWeight.getText())); 
+        } catch (Exception e) {
+            labelResult.setText("Anna paino desimaalilukuna");
+            textWeight.requestFocus();
+        }
+        
+        objectCat.setName(textName.getText());
+        
+        textResult.setText(objectCat.sayHello(objectCat.getColor())+"\nNimeni = "+objectCat.getName()+"\nPainan "+objectCat.getWeight()+" kiloa");
+        //labelResult.setText("Nimeni = "+objectCat.getName());
+        //labelResult.setText("Painan "+objectCat.getWeight()+" kiloa");
+        
     }//GEN-LAST:event_btnShowCatDataActionPerformed
 
     /**
@@ -142,9 +170,11 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelResult;
     private javax.swing.JTextField textColor;
     private javax.swing.JTextField textName;
+    private javax.swing.JTextArea textResult;
     private javax.swing.JTextField textWeight;
     // End of variables declaration//GEN-END:variables
 }
