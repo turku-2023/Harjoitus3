@@ -4,6 +4,8 @@
  */
 package com.mycompany.harjoitus3;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author pekka
@@ -123,10 +125,17 @@ public class MainUI extends javax.swing.JFrame {
         }
         
         objectCat.setName(textName.getText());
+        double weighPounds=Utils.toPounds(objectCat.getWeight());
+        weighPounds=Math.round(weighPounds*100)/100.0;
+
+        String result=objectCat.sayHello(objectCat.getColor());
+        result+="\nNimeni = "+objectCat.getName();
+        result+="\nPainan "+objectCat.getWeight()+" kiloa";
+        result+="\nEli "+weighPounds+" paunaa";
         
-        textResult.setText(objectCat.sayHello(objectCat.getColor())+"\nNimeni = "+objectCat.getName()+"\nPainan "+objectCat.getWeight()+" kiloa");
-        //labelResult.setText("Nimeni = "+objectCat.getName());
-        //labelResult.setText("Painan "+objectCat.getWeight()+" kiloa");
+        textResult.setText(result);
+   
+
         
     }//GEN-LAST:event_btnShowCatDataActionPerformed
 
